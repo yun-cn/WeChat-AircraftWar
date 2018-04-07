@@ -36,10 +36,10 @@ class Bullet(object):
         self.screen = screen_temp
         self.image  = pygame.image.load('./src/../image/bullet.png')
 
-    def display():
+    def display(self):
         self.screen.blit(self.image, (self.x, self.y))
 
-    def move():
+    def move(self):
         self.y -= 5
 
 
