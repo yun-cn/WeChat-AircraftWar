@@ -5,18 +5,13 @@ from pygame.locals import *
 import time
 import random
 
-class BasePlane(object):
-    def __init__(self, screen_temp, x, y, image_name):
-        self.x             =  x
-        self.y             =  y
-        self.screen        = screen_temp
-        self.image         =  pygame.image.load(image_name)
-        self.bullet_list   = []
-
-
-class HeroPlane(BasePlane):
+class HeroPlane(object):
     def __init__(self, screen_temp):
-        BasePlane.__init__(self, screen_temp, 30, 460, './src/../image/hero.png')
+        self.x = 30
+        self.y = 460
+        self.screen       =  screen_temp
+        self.image        =  pygame.image.load('./src/../image/hero.png')
+        self.bullet_list  =  []  #An object that stores a bullet
 
     def display(self):
         self.screen.blit(self.image, (self.x, self.y))
@@ -38,10 +33,15 @@ class HeroPlane(BasePlane):
         self.bullet_list.append(Bullet(self.screen, self.x,  self.y))
 
 
-class EnemyPlane(BasePlane):
+
+class EnemyPlane(object):
     def __init__(self, screen_temp):
-        BasePlane.__init__(self, screen_temp, 0, 0, './src/../image/enemy-1.png')
-        self.direction   =   "right"
+        self.x  = 0
+        self.y  = 0
+        self.screen      = screen_temp
+        self.image       = pygame.image.load('./src/../image/enemy-1.png')
+        self.direction   = "right"
+        self.bullet_list = []
 
     def display(self):
         self.screen.blit(self.image, (self.x, self.y))
@@ -64,8 +64,6 @@ class EnemyPlane(BasePlane):
     def fire(self):
         if random.randint(1, 20) == 10:
             self.bullet_list.append(EnemyBullet(self.screen, self.x, self.y))
-
-
 
 
 class Bullet(object):
